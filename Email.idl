@@ -1,0 +1,9 @@
+module EmailApp 
+{
+	interface Email
+	{
+		string sayHello();
+		string message(in string msg);
+		oneway void shutdown();
+	};
+};
