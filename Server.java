@@ -1,4 +1,4 @@
-import EmailApp.*;
+import DepositApp.*;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
@@ -8,7 +8,7 @@ import org.omg.PortableServer.POA;
 import java.util.Properties;
 
 //its here that i creat my methods
-class EmailImpl extends EmailPOA
+class DepositImpl extends DepositPOA
 {
 	private ORB orb;
 
@@ -17,15 +17,39 @@ class EmailImpl extends EmailPOA
 			orb = orb_val;
 		}
 
+		double prodA, prodB, prodC, prodD, prodE = 0f;
+
 		//implementes sayHello() method "for test"
 		public String sayHello()
 		{
 			return "\n Hello World !! \n";
 		}
 
-		public String message(String msg)
+		public void addProd(double quant, double type)
 		{
-			return msg;			
+			if(type == 0) prodA += quant;
+			else if(type == 1) prodB += quant;
+			else if(type == 2) prodC += quant;
+			else if(type == 3) prodD += quant;
+			else prodE += quant;
+		}
+
+		public void remProd(double quant, double type)
+		{
+			if(type == 0) prodA -= quant;
+			else if(type == 1) prodB -= quant;
+			else if(type == 2) prodC -= quant;
+			else if(type == 3) prodD -= quant;
+			else prodE -= quant;
+		}
+
+		public double showProd(double type)
+		{
+			if(type == 0) return prodA;
+			else if(type == 1) return prodB;
+			else if(type == 2) return prodC;
+			else if(type == 3) return prodD;
+			else return prodE;
 		}
 
 		//implements shutdown method
@@ -49,12 +73,12 @@ public class Server
 			rootpoa.the_POAManager().activate();
 
 			//create servant and register it with the ORB
-			EmailImpl emailImpl = new EmailImpl();
-			emailImpl.setORB(orb);
+			DepositImpl depositImpl = new DepositImpl();
+			depositImpl.setORB(orb);
 
 			//get reference from the servant
-			org.omg.CORBA.Object ref = rootpoa.servant_to_reference(emailImpl);
-			Email href = EmailHelper.narrow(ref);
+			org.omg.CORBA.Object ref = rootpoa.servant_to_reference(depositImpl);
+			Deposit href = DepositHelper.narrow(ref);
 
 			//get the root naming context
 			// NameService invokes the name service
@@ -64,7 +88,7 @@ public class Server
 			NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 
 			//bind the Object Reference in Naming
-			String name = "Email";
+			String name = "Deposit";
 			NameComponent path[] = ncRef.to_name( name );
 			ncRef.rebind(path, href);
 

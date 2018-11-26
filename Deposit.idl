@@ -1,0 +1,11 @@
+module DepositApp 
+{
+	interface Deposit
+	{
+		string sayHello();
+		void addProd(in double quant, in double type);
+		void remProd(in double quant, in double type);
+		double showProd(in double type);
+		oneway void shutdown();
+	};
+};
