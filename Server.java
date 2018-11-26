@@ -52,6 +52,7 @@ class DepositImpl extends DepositPOA
 			else return prodE;
 		}
 
+		
 		//implements shutdown method
 		public void shutdown()
 		{

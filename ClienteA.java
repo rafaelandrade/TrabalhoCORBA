@@ -68,13 +68,15 @@ public class ClienteA
 				}
 			}
 			*/
+
+
 			double type, quant = 0f;
 			quant = scan.nextInt();
 			type = scan.nextInt();
 			depositImpl.addProd(type, quant);
 			System.out.println(depositImpl.showProd(type));
 			//System.out.println(depositImpl.sayHello());
-			depositImpl.shutdown();
+			//depositImpl.shutdown();
 
 		}catch(Exception e)
 		{
