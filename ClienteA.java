@@ -10,6 +10,9 @@ public class ClienteA
 
 	public static void main(String args[])
 	{
+		String _ior = null;
+		String _usage = "Usage: JAConsole iiop://<host>:<port>\n";
+
 		try{
 			// create and initicialize the ORB
 			ORB orb = ORB.init(args, null);
@@ -29,59 +32,80 @@ public class ClienteA
 			Scanner scan = new Scanner(System.in);
 			
 			int option = 0;
-
-			/*
+			int type, quant = 0;
+			
 			while(option != 5)
 			{
 				System.out.println("\n -- MENU -- \n");
 				System.out.println(" 1 - Add Produto \n");
 				System.out.println(" 2 - Remove Produto \n");
 				System.out.println(" 3 - Lista Produto \n");
-				System.out.println(" 5 - Sair");
-				
+				System.out.println(" 5 - Sair\n");
+				System.out.println("Resposta: ");
 				option = scan.nextInt();
-				double type, quant = 0f;
+				
 
 				switch(option)
 				{
 					case 1:
-							System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
+							System.out.println("\n Digite qual produto entre (0,1,2,3,4). E a quantidade.\n");
+							System.out.println("Resposta: ");
 							type = scan.nextInt();
-							System.out.println("Digite a quantidade do produto. \n");
 							quant = scan.nextInt();
-							depositImpl.addProd(type, quant);
+							//System.out.println("Digite a quantidade do produto. \n");
+							//System.out.println("Resposta: ");					
+							depositImpl.addProd(quant, type);
 						break;
 					case 2:
 							System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
+							System.out.println("Resposta: ");
 							type = scan.nextInt();
 							System.out.println("Digite a quantidade do produto. \n");
+							System.out.println("Resposta: ");
 							quant = scan.nextInt();
 							depositImpl.remProd(type, quant);
 						break;
 					case 3:
+							int test = 0;
 							System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
-							type = scan.nextInt();
-							System.out.println(depositImpl.showProd(type));
+							System.out.println("Resposta: ");
+							test = scan.nextInt();
+							System.out.println(depositImpl.showProd(test));
 						break;
 					default:
 						System.out.println("Error!");
 				}
 			}
-			*/
-
-
-			double type, quant = 0f;
-			quant = scan.nextInt();
-			type = scan.nextInt();
-			depositImpl.addProd(type, quant);
-			System.out.println(depositImpl.showProd(type));
-			//System.out.println(depositImpl.sayHello());
+		
 			//depositImpl.shutdown();
+		}
+		catch(org.omg.CORBA.COMM_FAILURE cf)
+		{
+			 // The server is not running, or the specified URL is
+           // wrong. 
+             System.out.println(
+              "Error: could not connect to server at " + _ior + "\n"
+             + "Make sure the specified address is correct and the "
+             + "server is running.\n\n" + _usage );
+		}
+		catch ( org.omg.CORBA.OBJECT_NOT_EXIST cone )
+        {
+            // Requested object (component) does not exist.
+            System.out.println(
+               "Error: CORBA OBJECT_NOT_EXIST exception. Check the "
+             + "server log file for more information. Also verify "
+             + "that the Tutorial/JavaArithmetic "
+             + "component has been created properly in "
+            + "Deposit Manager. \n"); 
 
-		}catch(Exception e)
+        }
+		catch(Exception e)
 		{
 			System.err.println("ERROR: " + e);
 			e.printStackTrace(System.out);
 		}
 	}
+
+
+
 }

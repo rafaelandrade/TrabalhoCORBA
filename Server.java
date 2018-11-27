@@ -17,7 +17,7 @@ class DepositImpl extends DepositPOA
 			orb = orb_val;
 		}
 
-		double prodA, prodB, prodC, prodD, prodE = 0f;
+		int prodA, prodB, prodC, prodD, prodE = 0;
 
 		//implementes sayHello() method "for test"
 		public String sayHello()
@@ -25,7 +25,7 @@ class DepositImpl extends DepositPOA
 			return "\n Hello World !! \n";
 		}
 
-		public void addProd(double quant, double type)
+		public void addProd(int quant, int type)
 		{
 			if(type == 0) prodA += quant;
 			else if(type == 1) prodB += quant;
@@ -34,7 +34,7 @@ class DepositImpl extends DepositPOA
 			else prodE += quant;
 		}
 
-		public void remProd(double quant, double type)
+		public void remProd(int quant, int type)
 		{
 			if(type == 0) prodA -= quant;
 			else if(type == 1) prodB -= quant;
@@ -43,7 +43,7 @@ class DepositImpl extends DepositPOA
 			else prodE -= quant;
 		}
 
-		public double showProd(double type)
+		public int showProd(int type)
 		{
 			if(type == 0) return prodA;
 			else if(type == 1) return prodB;
@@ -99,7 +99,13 @@ public class Server
 			orb.run(); 
 
 
-		}catch(Exception e)
+		}
+		catch(org.omg.PortableServer.POAPackage.AdapterAlreadyExists ex)
+		{
+			System.out.println("Failed to create POA with Exception: " + ex.toString());
+			System.exit(1);
+		}
+		catch(Exception e)
 		{
 			System.err.println("Error:" + e);
 			e.printStackTrace(System.out);
