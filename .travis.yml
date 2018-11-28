@@ -3,4 +3,4 @@ jdk:
 - oraclejdk8
 - oraclejdk9
 sudo: false
-script: mvn test -f ./source/pom.xml
+script: mvn clean verify
