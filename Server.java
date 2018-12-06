@@ -100,11 +100,6 @@ public class Server
 
 
 		}
-		catch(org.omg.PortableServer.POAPackage.AdapterAlreadyExists ex)
-		{
-			System.out.println("Failed to create POA with Exception: " + ex.toString());
-			System.exit(1);
-		}
 		catch(Exception e)
 		{
 			System.err.println("Error:" + e);

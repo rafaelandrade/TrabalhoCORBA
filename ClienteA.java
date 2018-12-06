@@ -88,22 +88,12 @@ public class ClienteA
              + "Make sure the specified address is correct and the "
              + "server is running.\n\n" + _usage );
 		}
-		catch ( org.omg.CORBA.OBJECT_NOT_EXIST cone )
-        {
-            // Requested object (component) does not exist.
-            System.out.println(
-               "Error: CORBA OBJECT_NOT_EXIST exception. Check the "
-             + "server log file for more information. Also verify "
-             + "that the Tutorial/JavaArithmetic "
-             + "component has been created properly in "
-            + "Deposit Manager. \n"); 
-
-        }
-		catch(Exception e)
+		catch (Exception e) 
 		{
-			System.err.println("ERROR: " + e);
-			e.printStackTrace(System.out);
-		}
+          System.out.println("ERROR : " + e) ;
+          e.printStackTrace(System.out);
+        }
+		return;
 	}
 
 
