@@ -51,13 +51,6 @@ class DepositImpl extends DepositPOA
 			else if(type == 3) return prodD;
 			else return prodE;
 		}
-
-		
-		//implements shutdown method
-		public void shutdown()
-		{
-			orb.shutdown(false);
-		}
 }
 
 
@@ -97,8 +90,7 @@ public class Server
 
 			//waiting for invocations from clients
 			orb.run(); 
-
-
+			
 		}
 		catch(Exception e)
 		{

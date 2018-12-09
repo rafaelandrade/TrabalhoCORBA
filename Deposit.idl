@@ -3,9 +3,9 @@ module DepositApp
 	interface Deposit
 	{
 		string sayHello();
-		void addProd(in double quant, in double type);
-		void remProd(in double quant, in double type);
-		double showProd(in double type);
-		oneway void shutdown();
+		void addProd(in long quant, in long type);
+		void remProd(in long quant, in long type);
+		long showProd(in long type);
+		//oneway void shutdown();
 	};
 };

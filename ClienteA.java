@@ -42,18 +42,17 @@ public class ClienteA
 				System.out.println(" 3 - Lista Produto \n");
 				System.out.println(" 5 - Sair\n");
 				System.out.println("Resposta: ");
-				option = scan.nextInt();
-				
+				option = scan.nextInt();			
 
 				switch(option)
 				{
 					case 1:
-							System.out.println("\n Digite qual produto entre (0,1,2,3,4). E a quantidade.\n");
+							System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
 							System.out.println("Resposta: ");
-							type = scan.nextInt();
-							quant = scan.nextInt();
-							//System.out.println("Digite a quantidade do produto. \n");
-							//System.out.println("Resposta: ");					
+							type = scan.nextInt();			
+							System.out.println("\n Digite a quantidade do produto. \n");
+							System.out.println("Resposta: ");	
+							quant = scan.nextInt();				
 							depositImpl.addProd(quant, type);
 						break;
 					case 2:
@@ -77,26 +76,15 @@ public class ClienteA
 				}
 			}
 
-
-
-			//depositImpl.shutdown();
 		}
 		catch(org.omg.CORBA.COMM_FAILURE cf)
 		{
-			 // The server is not running, or the specified URL is
-           // wrong. 
-             /*System.out.println(
-              "Error: could not connect to server at " + _ior + "\n"
-             + "Make sure the specified address is correct and the "
-             + "server is running.\n\n" + _usage ); */
-
             System.out.println("\n Problema na conexao, rede lenta. \n\n");
 
             long startTime = System.currentTimeMillis();
 			long elapsedTime = 0L;
 
 			while (elapsedTime < 2*15*10000) {
-				 //perform db poll/check
 				   elapsedTime = (new Date()).getTime() - startTime;
 			}
 
