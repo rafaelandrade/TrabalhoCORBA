@@ -90,11 +90,18 @@ public class ClienteA
              + "Make sure the specified address is correct and the "
              + "server is running.\n\n" + _usage ); */
 
-             System.out.println("\n Problema na conexao, rede lenta. \n\n");
+            System.out.println("\n Problema na conexao, rede lenta. \n\n");
 
-             
-             	
+            long startTime = System.currentTimeMillis();
+			long elapsedTime = 0L;
 
+			while (elapsedTime < 2*15*10000) {
+				 //perform db poll/check
+				   elapsedTime = (new Date()).getTime() - startTime;
+			}
+
+			System.out.println("Error: não foi possível conectar no servidor. \n\n");
+			System.out.println("Tente novamente mais tarde.");
 		}
 		catch (Exception e) 
 		{
