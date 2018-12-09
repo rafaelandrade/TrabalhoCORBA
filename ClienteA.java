@@ -33,7 +33,7 @@ public class ClienteA
 			
 			int option = 0;
 			int type, quant = 0;
-			
+
 			while(option != 5)
 			{
 				System.out.println("\n -- MENU -- \n");
@@ -76,17 +76,25 @@ public class ClienteA
 						System.out.println("Error!");
 				}
 			}
-		
+
+
+
 			//depositImpl.shutdown();
 		}
 		catch(org.omg.CORBA.COMM_FAILURE cf)
 		{
 			 // The server is not running, or the specified URL is
            // wrong. 
-             System.out.println(
+             /*System.out.println(
               "Error: could not connect to server at " + _ior + "\n"
              + "Make sure the specified address is correct and the "
-             + "server is running.\n\n" + _usage );
+             + "server is running.\n\n" + _usage ); */
+
+             System.out.println("\n Problema na conexao, rede lenta. \n\n");
+
+             
+             	
+
 		}
 		catch (Exception e) 
 		{

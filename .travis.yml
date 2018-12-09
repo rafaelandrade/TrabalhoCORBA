@@ -3,4 +3,9 @@ jdk:
 - oraclejdk8
 - oraclejdk9
 sudo: false
-script: mvn clean verify
+install: true
+script: ./mvn clean verify
+
+cache:
+	directories:
+	- $HOME/ .m2
