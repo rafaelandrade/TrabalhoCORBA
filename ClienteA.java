@@ -84,13 +84,83 @@ public class ClienteA
             long startTime = System.currentTimeMillis();
 			long elapsedTime = 0L;
 
-			while (elapsedTime < 2*15*10000) {
+			while (elapsedTime < 2*15*1000) {
 				   elapsedTime = (new Date()).getTime() - startTime;
 			}
 
-			System.out.println("Error: não foi possível conectar no servidor. \n\n");
-			System.out.println("Tente novamente mais tarde.");
-		}
+				try{
+				// create and initicialize the ORB
+				ORB orb = ORB.init(args, null);
+
+				// get the root naming context
+				org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
+				// Use NamingContextExt instead of NamingContex. This is
+				// part of the Interoperable naming Service
+				NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+
+				// Resolv the Object Reference in Maning
+				String name = "Deposit";
+				depositImpl = DepositHelper.narrow(ncRef.resolve_str(name));
+
+				System.out.println("Obtained a handle on server object: " + depositImpl);
+
+				Scanner scan = new Scanner(System.in);
+				
+				int option = 0;
+				int type, quant = 0;
+
+				while(option != 5)
+				{
+					System.out.println("\n -- MENU -- \n");
+					System.out.println(" 1 - Add Produto \n");
+					System.out.println(" 2 - Remove Produto \n");
+					System.out.println(" 3 - Lista Produto \n");
+					System.out.println(" 5 - Sair\n");
+					System.out.println("Resposta: ");
+					option = scan.nextInt();			
+
+					switch(option)
+					{
+						case 1:
+								System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
+								System.out.println("Resposta: ");
+								type = scan.nextInt();			
+								System.out.println("\n Digite a quantidade do produto. \n");
+								System.out.println("Resposta: ");	
+								quant = scan.nextInt();				
+								depositImpl.addProd(quant, type);
+							break;
+						case 2:
+								System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
+								System.out.println("Resposta: ");
+								type = scan.nextInt();
+								System.out.println("Digite a quantidade do produto. \n");
+								System.out.println("Resposta: ");
+								quant = scan.nextInt();
+								depositImpl.remProd(type, quant);
+							break;
+						case 3:
+								int test = 0;
+								System.out.println("\n Digite qual produto entre (0,1,2,3,4).\n");
+								System.out.println("Resposta: ");
+								test = scan.nextInt();
+								System.out.println(depositImpl.showProd(test));
+							break;
+						default:
+							System.out.println("Error!");
+					}
+				}
+
+			}
+			catch (Exception e) 
+			{
+	          System.out.println("ERROR : " + e) ;
+	          e.printStackTrace(System.out);
+	        }
+
+				System.out.println("Error: não foi possível conectar no servidor. \n\n");
+				System.out.println("Tente novamente mais tarde.");
+			}
 		catch (Exception e) 
 		{
           System.out.println("ERROR : " + e) ;
